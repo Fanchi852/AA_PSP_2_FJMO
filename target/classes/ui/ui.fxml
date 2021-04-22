@@ -34,8 +34,8 @@
                               <Label layoutX="10.0" layoutY="310.0" text="URL" />
                               <Label layoutX="10.0" layoutY="330.0" text="Creado" />
                               <Label layoutX="10.0" layoutY="350.0" text="Modificado" />
-                              <TextArea editable="false" layoutX="5.0" layoutY="215.0" prefHeight="95.0" prefWidth="140.0" />
-                              <TextArea editable="false" layoutX="155.0" layoutY="215.0" prefHeight="95.0" prefWidth="140.0" />
+                              <TextArea layoutX="5.0" layoutY="215.0" prefHeight="95.0" prefWidth="140.0" />
+                              <TextArea layoutX="155.0" layoutY="215.0" prefHeight="95.0" prefWidth="140.0" />
                               <Label layoutX="80.0" text="Label" />
                               <Label layoutX="80.0" layoutY="20.0" text="Label" />
                               <Label layoutX="130.0" layoutY="40.0" text="Label" />
@@ -75,8 +75,8 @@
                               <Label layoutX="10.0" layoutY="260.0" text="Peliculas" />
                               <Label layoutX="10.0" layoutY="330.0" text="Creado" />
                               <Label layoutX="10.0" layoutY="350.0" text="Modificado" />
-                              <TextArea editable="false" layoutX="5.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
-                              <TextArea editable="false" layoutX="155.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
+                              <TextArea layoutX="5.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
+                              <TextArea layoutX="155.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
                               <Label layoutX="80.0" text="Label" />
                               <Label layoutX="80.0" layoutY="20.0" text="Label" />
                               <Label layoutX="120.0" layoutY="40.0" text="Label" />
