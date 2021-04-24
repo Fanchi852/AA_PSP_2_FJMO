@@ -1,23 +1,21 @@
 package pojos;
 
-import javafx.collections.ObservableList;
-import rx.Observable;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Planets {
+public class Starships {
 
     private String count, next, previous;
-    private ObservableList<Planet> results;
+    private ArrayList<Planet> results;
 
-    public Planets() {
-    }
-
-    public Planets(String count, String next, String previous, ObservableList<Planet> results) {
+    public Starships(String count, String next, String previous, ArrayList<Planet> results) {
         this.count = count;
         this.next = next;
         this.previous = previous;
         this.results = results;
+    }
+
+    public Starships() {
     }
 
     public String getCount() {
@@ -44,11 +42,11 @@ public class Planets {
         this.previous = previous;
     }
 
-    public ObservableList<Planet> getResults() {
+    public ArrayList<Planet> getResults() {
         return results;
     }
 
-    public void setResults(ObservableList<Planet> results) {
+    public void setResults(ArrayList<Planet> results) {
         this.results = results;
     }
 }

@@ -1,17 +1,16 @@
 package pojos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Startships {
+public class Starship {
 
     private String name, model, starship_class, manufacturer, cost_in_credits, length, crew, passengers, max_atmosphering_speed, hyperdrive_rating, MGLT, cargo_capacity, consumables, url , edited , created;
     private ArrayList<String> films, pilots;
 
-    public Startships() {
+    public Starship() {
     }
 
-    public Startships(String name, String model, String starship_class, String manufacturer, String cost_in_credits, String length, String crew, String passengers, String max_atmosphering_speed, String hyperdrive_rating, String MGLT, String cargo_capacity, String consumables, String url, String edited, String created, ArrayList<String> films, ArrayList<String> pilots) {
+    public Starship(String name, String model, String starship_class, String manufacturer, String cost_in_credits, String length, String crew, String passengers, String max_atmosphering_speed, String hyperdrive_rating, String MGLT, String cargo_capacity, String consumables, String url, String edited, String created, ArrayList<String> films, ArrayList<String> pilots) {
         this.name = name;
         this.model = model;
         this.starship_class = starship_class;
@@ -175,4 +174,5 @@ public class Startships {
     public void setPilots(ArrayList<String> pilots) {
         this.pilots = pilots;
     }
+
 }

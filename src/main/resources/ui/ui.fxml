@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -9,100 +11,103 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Planetas">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="600.0">
-                     <children>
-                        <Pane layoutX="300.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="461.0" prefWidth="600.0">
+         <children>
+            <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Planetas">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="600.0">
                            <children>
-                              <Label layoutX="10.0" text="Nombre" />
-                              <Label layoutX="10.0" layoutY="20.0" text="Diametro" />
-                              <Label layoutX="10.0" layoutY="40.0" text="Periodo de rotacion" />
-                              <Label layoutX="10.0" layoutY="60.0" text="Periodo orbital" />
-                              <Label layoutX="10.0" layoutY="80.0" text="Gravedad" />
-                              <Label layoutX="10.0" layoutY="100.0" text="Poblacion" />
-                              <Label layoutX="10.0" layoutY="120.0" text="Clima" />
-                              <Label layoutX="10.0" layoutY="140.0" text="Terreno" />
-                              <Label layoutX="10.0" layoutY="160.0" text="Superficie acuatica" />
-                              <Label layoutX="180.0" layoutY="195.0" text="Residentes" />
-                              <Label layoutX="10.0" layoutY="195.0" text="Peliculas" />
-                              <Label layoutX="10.0" layoutY="310.0" text="URL" />
-                              <Label layoutX="10.0" layoutY="330.0" text="Creado" />
-                              <Label layoutX="10.0" layoutY="350.0" text="Modificado" />
-                              <TextArea editable="false" layoutX="5.0" layoutY="215.0" prefHeight="95.0" prefWidth="140.0" />
-                              <TextArea editable="false" layoutX="155.0" layoutY="215.0" prefHeight="95.0" prefWidth="140.0" />
-                              <Label layoutX="80.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="20.0" text="Label" />
-                              <Label layoutX="130.0" layoutY="40.0" text="Label" />
-                              <Label layoutX="130.0" layoutY="60.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="80.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="100.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="120.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="140.0" text="Label" />
-                              <Label layoutX="130.0" layoutY="160.0" text="Label" />
-                              <Label layoutX="90.0" layoutY="310.0" text="Label" />
-                              <Label layoutX="90.0" layoutY="330.0" text="Label" />
-                              <Label layoutX="90.0" layoutY="350.0" text="Label" />
+                              <Pane layoutX="300.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="10.0" text="Nombre" />
+                                    <Label layoutX="10.0" layoutY="20.0" text="Diametro" />
+                                    <Label layoutX="10.0" layoutY="40.0" text="Periodo de rotacion" />
+                                    <Label layoutX="10.0" layoutY="60.0" text="Periodo orbital" />
+                                    <Label layoutX="10.0" layoutY="80.0" text="Gravedad" />
+                                    <Label layoutX="10.0" layoutY="100.0" text="Poblacion" />
+                                    <Label layoutX="10.0" layoutY="120.0" text="Clima" />
+                                    <Label layoutX="10.0" layoutY="140.0" text="Terreno" />
+                                    <Label layoutX="10.0" layoutY="160.0" text="Superficie acuatica" />
+                                    <Label layoutX="180.0" layoutY="180.0" text="Residentes" />
+                                    <Label layoutX="10.0" layoutY="180.0" text="Peliculas" />
+                                    <Label layoutX="10.0" layoutY="330.0" text="Creado" />
+                                    <Label layoutX="10.0" layoutY="350.0" text="Modificado" />
+                                    <TextArea fx:id="planets_film_list_vew" editable="false" layoutX="5.0" layoutY="200.0" prefHeight="130.0" prefWidth="140.0" />
+                                    <TextArea fx:id="planets_residents_list_view" editable="false" layoutX="155.0" layoutY="200.0" prefHeight="130.0" prefWidth="140.0" />
+                                    <Label fx:id="lb_planet_name" layoutX="80.0" text="Label" />
+                                    <Label fx:id="lb_planet_diameter" layoutX="80.0" layoutY="20.0" text="Label" />
+                                    <Label fx:id="lb_planet_rotation_period" layoutX="130.0" layoutY="40.0" text="Label" />
+                                    <Label fx:id="lb_planet_orbital_period" layoutX="130.0" layoutY="60.0" text="Label" />
+                                    <Label fx:id="lb_planet_gravity" layoutX="80.0" layoutY="80.0" text="Label" />
+                                    <Label fx:id="lb_planet_population" layoutX="80.0" layoutY="100.0" text="Label" />
+                                    <Label fx:id="lb_planet_climate" layoutX="80.0" layoutY="120.0" text="Label" />
+                                    <Label fx:id="lb_planet_terrain" layoutX="80.0" layoutY="140.0" text="Label" />
+                                    <Label fx:id="lb_planet_surface_water" layoutX="130.0" layoutY="160.0" text="Label" />
+                                    <Label fx:id="lb_planet_created" layoutX="90.0" layoutY="330.0" text="Label" />
+                                    <Label fx:id="lb_planet_edited" layoutX="90.0" layoutY="350.0" text="Label" />
+                                 </children>
+                              </Pane>
+                              <ListView fx:id="planets_list_view" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0" />
                            </children>
-                        </Pane>
-                        <ListView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Naves">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ListView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Naves">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="10.0" text="Nombre" />
-                              <Label layoutX="10.0" layoutY="20.0" text="Modelo" />
-                              <Label layoutX="10.0" layoutY="40.0" text="Clase de nave" />
-                              <Label layoutX="10.0" layoutY="60.0" text="Manufacturador" />
-                              <Label layoutX="10.0" layoutY="80.0" text="Coste en creditos" />
-                              <Label layoutX="10.0" layoutY="100.0" text="Longitud" />
-                              <Label layoutX="10.0" layoutY="120.0" text="Tripulacion" />
-                              <Label layoutX="10.0" layoutY="140.0" text="Pasageros" />
-                              <Label layoutX="10.0" layoutY="160.0" text="Velocidad atmosferica maxima" />
-                              <Label layoutX="160.0" layoutY="260.0" text="Pilotos" />
-                              <Label layoutX="10.0" layoutY="260.0" text="Peliculas" />
-                              <Label layoutX="10.0" layoutY="330.0" text="Creado" />
-                              <Label layoutX="10.0" layoutY="350.0" text="Modificado" />
-                              <TextArea editable="false" layoutX="5.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
-                              <TextArea editable="false" layoutX="155.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
-                              <Label layoutX="80.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="20.0" text="Label" />
-                              <Label layoutX="120.0" layoutY="40.0" text="Label" />
-                              <Label layoutX="120.0" layoutY="60.0" text="Label" />
-                              <Label layoutX="120.0" layoutY="80.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="100.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="120.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="140.0" text="Label" />
-                              <Label layoutX="180.0" layoutY="160.0" text="Label" />
-                              <Label layoutX="90.0" layoutY="330.0" text="Label" />
-                              <Label layoutX="90.0" layoutY="350.0" text="Label" />
-                              <Label layoutX="10.0" layoutY="180.0" text="Ratio de hipervelocidad" />
-                              <Label layoutX="10.0" layoutY="200.0" text="MGLT" />
-                              <Label layoutX="10.0" layoutY="220.0" text="Capacidad de carga" />
-                              <Label layoutX="10.0" layoutY="240.0" text="Autonomia" />
-                              <Label layoutX="180.0" layoutY="180.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="200.0" text="Label" />
-                              <Label layoutX="120.0" layoutY="220.0" text="Label" />
-                              <Label layoutX="80.0" layoutY="240.0" text="Label" />
+                              <ListView fx:id="Starships_list_view" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0" />
+                              <Pane prefHeight="400.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="10.0" text="Nombre" />
+                                    <Label layoutX="10.0" layoutY="20.0" text="Modelo" />
+                                    <Label layoutX="10.0" layoutY="40.0" text="Clase de nave" />
+                                    <Label layoutX="10.0" layoutY="60.0" text="Manufacturador" />
+                                    <Label layoutX="10.0" layoutY="80.0" text="Coste en creditos" />
+                                    <Label layoutX="10.0" layoutY="100.0" text="Longitud" />
+                                    <Label layoutX="10.0" layoutY="120.0" text="Tripulacion" />
+                                    <Label layoutX="10.0" layoutY="140.0" text="Pasageros" />
+                                    <Label layoutX="10.0" layoutY="160.0" text="Velocidad atmosferica maxima" />
+                                    <Label layoutX="160.0" layoutY="260.0" text="Pilotos" />
+                                    <Label layoutX="10.0" layoutY="260.0" text="Peliculas" />
+                                    <Label layoutX="10.0" layoutY="330.0" text="Creado" />
+                                    <Label layoutX="10.0" layoutY="350.0" text="Modificado" />
+                                    <TextArea fx:id="Starships_film_list_view" editable="false" layoutX="5.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
+                                    <TextArea fx:id="Starships_pilots_list_view" editable="false" layoutX="155.0" layoutY="280.0" prefHeight="45.0" prefWidth="140.0" />
+                                    <Label fx:id="lb_starship_name" layoutX="80.0" text="Label" />
+                                    <Label fx:id="lb_starship_model" layoutX="80.0" layoutY="20.0" text="Label" />
+                                    <Label fx:id="lb_starship_starship_class" layoutX="120.0" layoutY="40.0" text="Label" />
+                                    <Label fx:id="lb_starship_manufacturer" layoutX="120.0" layoutY="60.0" text="Label" />
+                                    <Label fx:id="lb_starship_cost_in_credits" layoutX="120.0" layoutY="80.0" text="Label" />
+                                    <Label fx:id="lb_starship_length" layoutX="80.0" layoutY="100.0" text="Label" />
+                                    <Label fx:id="lb_starship_crew" layoutX="80.0" layoutY="120.0" text="Label" />
+                                    <Label fx:id="lb_starship_passengers" layoutX="80.0" layoutY="140.0" text="Label" />
+                                    <Label fx:id="lb_starship_max_atmosphering_speed" layoutX="180.0" layoutY="160.0" text="Label" />
+                                    <Label fx:id="lb_starship_created" layoutX="90.0" layoutY="330.0" text="Label" />
+                                    <Label fx:id="lb_starship_edited" layoutX="90.0" layoutY="350.0" text="Label" />
+                                    <Label layoutX="10.0" layoutY="180.0" text="Ratio de hipervelocidad" />
+                                    <Label layoutX="10.0" layoutY="200.0" text="MGLT" />
+                                    <Label layoutX="10.0" layoutY="220.0" text="Capacidad de carga" />
+                                    <Label layoutX="10.0" layoutY="240.0" text="Autonomia" />
+                                    <Label fx:id="lb_starship_hyperdrive_rating" layoutX="180.0" layoutY="180.0" text="Label" />
+                                    <Label fx:id="lb_starship_MGLT" layoutX="80.0" layoutY="200.0" text="Label" />
+                                    <Label fx:id="lb_starship_cargo_capacity" layoutX="120.0" layoutY="220.0" text="Label" />
+                                    <Label fx:id="lb_starship_consumables" layoutX="80.0" layoutY="240.0" text="Label" />
+                                 </children>
+                              </Pane>
                            </children>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
-               </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <Button fx:id="bt_download_data" layoutY="400.0" mnemonicParsing="false" onAction="#downloadData" prefHeight="38.0" prefWidth="600.0" text="Cargar datos" />
+            <ProgressBar fx:id="load_bar" layoutY="440.0" prefHeight="18.0" prefWidth="600.0" progress="0.0" />
+         </children>
+      </Pane>
    </children>
 </VBox>

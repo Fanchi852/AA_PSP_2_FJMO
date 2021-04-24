@@ -20,7 +20,7 @@ public class PlanetsService {
         api = retrofit.create(PlanetsApiService.class);
     }
 
-    public Observable<Planets> getAllCountries() {
+    public Observable<Planets> getAllPlanets() {
         return api.getAllplanetas();
     }
 
