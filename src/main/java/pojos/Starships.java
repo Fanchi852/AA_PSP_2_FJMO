@@ -6,9 +6,9 @@ import java.util.Arrays;
 public class Starships {
 
     private String count, next, previous;
-    private ArrayList<Planet> results;
+    private ArrayList<Starship> results;
 
-    public Starships(String count, String next, String previous, ArrayList<Planet> results) {
+    public Starships(String count, String next, String previous, ArrayList<Starship> results) {
         this.count = count;
         this.next = next;
         this.previous = previous;
@@ -42,11 +42,11 @@ public class Starships {
         this.previous = previous;
     }
 
-    public ArrayList<Planet> getResults() {
+    public ArrayList<Starship> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Planet> results) {
+    public void setResults(ArrayList<Starship> results) {
         this.results = results;
     }
 }

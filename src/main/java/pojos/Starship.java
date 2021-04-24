@@ -175,4 +175,25 @@ public class Starship {
         this.pilots = pilots;
     }
 
+    @Override
+    public String toString() {
+        return "name: " + name +
+                ", model: " + model +
+                ", starship_class: " + starship_class +
+                ", manufacturer: " + manufacturer +
+                ", cost_in_credits: " + cost_in_credits +
+                ", length: " + length +
+                ", crew: " + crew +
+                ", passengers: " + passengers +
+                ", max_atmosphering_speed: " + max_atmosphering_speed +
+                ", hyperdrive_rating: " + hyperdrive_rating +
+                ", MGLT: " + MGLT +
+                ", cargo_capacity: " + cargo_capacity +
+                ", consumables: " + consumables +
+                ", url: " + url +
+                ", edited: " + edited +
+                ", created: " + created +
+                ", films: " + films +
+                ", pilots: " + pilots;
+    }
 }
