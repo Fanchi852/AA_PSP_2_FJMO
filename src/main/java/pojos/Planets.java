@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class Planets {
 
     private String count, next, previous;
-    private ObservableList<Planet> results;
+    private ArrayList<Planet> results;
 
     public Planets() {
     }
 
-    public Planets(String count, String next, String previous, ObservableList<Planet> results) {
+    public Planets(String count, String next, String previous, ArrayList<Planet> results) {
         this.count = count;
         this.next = next;
         this.previous = previous;
@@ -44,11 +44,21 @@ public class Planets {
         this.previous = previous;
     }
 
-    public ObservableList<Planet> getResults() {
+    public ArrayList<Planet> getResults() {
         return results;
     }
 
-    public void setResults(ObservableList<Planet> results) {
+    public void setResults(ArrayList<Planet> results) {
         this.results = results;
+    }
+
+    @Override
+    public String toString() {
+        return "Planets{" +
+                "count='" + count + '\'' +
+                ", next='" + next + '\'' +
+                ", previous='" + previous + '\'' +
+                ", results=" + results +
+                '}';
     }
 }

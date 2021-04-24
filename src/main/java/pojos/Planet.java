@@ -1,22 +1,19 @@
 package pojos;
 
-import javafx.collections.ObservableList;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class Planet {
 
     private String name, diameter, rotation_period, orbital_period, gravity, population, climate, terrain, surface_water, edited , created;
-    private ObservableList<String> films, residents ;
-    private PropertyChangeSupport support;
+    private ArrayList<String> films, residents ;
+
 
     public Planet() {
-        support = new PropertyChangeSupport(this);
+
     }
 
-    public Planet(String name, String diameter, String rotation_period, String orbital_period, String gravity, String population, String climate, String terrain, String surface_water, String edited, String created, ObservableList<String> films, ObservableList<String> residents) {
+    public Planet(String name, String diameter, String rotation_period, String orbital_period, String gravity, String population, String climate, String terrain, String surface_water, String edited, String created, ArrayList<String> films, ArrayList<String> residents) {
         this.name = name;
         this.diameter = diameter;
         this.rotation_period = rotation_period;
@@ -30,7 +27,7 @@ public class Planet {
         this.created = created;
         this.films = films;
         this.residents = residents;
-        support = new PropertyChangeSupport(this);
+
     }
 
     public String getName() {
@@ -121,45 +118,35 @@ public class Planet {
         this.created = created;
     }
 
-    public ObservableList<String> getFilms() {
+    public ArrayList<String> getFilms() {
         return films;
     }
 
-    public void setFilms(ObservableList<String> films) {
+    public void setFilms(ArrayList<String> films) {
         this.films = films;
     }
 
-    public ObservableList<String> getResidents() {
+    public ArrayList<String> getResidents() {
         return residents;
     }
 
-    public void setResidents(ObservableList<String> residents) {
+    public void setResidents(ArrayList<String> residents) {
         this.residents = residents;
     }
 
-    public void addObserver(PropertyChangeListener observer) {
-        support.addPropertyChangeListener(observer);
-    }
 
-    public void removeObserver(PropertyChangeListener observer) {
-        support.removePropertyChangeListener(observer);
-    }
 
-    public void copyAndTell(Planet planet){
-        support.firePropertyChange("planet",this, planet);
-        this.name = planet.getName();
-        this.diameter = planet.getDiameter();
-        this.rotation_period = planet.getRotation_period();
-        this.orbital_period = planet.getOrbital_period();
-        this.gravity = planet.getGravity();
-        this.population = planet.getPopulation();
-        this.climate = planet.getClimate();
-        this.terrain = planet.getTerrain();
-        this.surface_water = planet.getSurface_water();
-        this.edited = planet.getEdited();
-        this.created = planet.getCreated();
-        this.films = planet.getFilms();
-        this.residents = planet.getResidents();
+    @Override
+    public String toString() {
+        return "Nombre: " + name +
+                ", Diametro: " + diameter +
+                ", Perioro de rotacion: " + rotation_period +
+                ", Periodo orbital: " + orbital_period +
+                ", Gravedad: " + gravity +
+                ", Poblacion: " + population +
+                ", Clima: " + climate +
+                ", Terreno: " + terrain +
+                ", Superficie aquatica: " + surface_water;
     }
 }
 
