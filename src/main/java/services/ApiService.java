@@ -8,6 +8,7 @@ import rx.Observable;
 
 public interface ApiService {
 
+
     @GET("planets/?page=1")
     Observable<Planets> getPage1planets();
     @GET("planets/?page=2")

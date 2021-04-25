@@ -18,6 +18,8 @@ import services.Service;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executors;
 
 public class AppController {
@@ -34,14 +36,36 @@ public class AppController {
     static Planet planet_aux = new Planet();
     static ArrayList<Planet> planetlist = new ArrayList<>();
     static Starship starsip_aux = new Starship();
-    static ArrayList<Starship> Starshiplist = new ArrayList<>();
+    static ArrayList<Starship> starshiplist = new ArrayList<>();
+    static Map<String,Boolean> chekplanet = new HashMap();
+    static Map<String,Boolean> chekstarships = new HashMap();
+    static Map<String,Boolean> chekprogres = new HashMap();
+
 
     @FXML
     public void downloadData(Event event) {
-        load_bar.setProgress(-1.0);
+        //load_bar.setProgress(-1.0);
         planetlist.clear();
-        Starshiplist.clear();
+        starshiplist.clear();
+        planets_list_view.getItems().clear();
+        Starships_list_view.getItems().clear();
+
         final Service service = new Service();
+
+        chekplanet.put("ppag1", false);
+        chekplanet.put("ppag2", false);
+        chekplanet.put("ppag3", false);
+        chekplanet.put("ppag4", false);
+        chekplanet.put("ppag5", false);
+        chekplanet.put("ppag6", false);
+
+        chekstarships.put("spag1", false);
+        chekstarships.put("spag2", false);
+        chekstarships.put("spag3", false);
+        chekstarships.put("spag4", false);
+
+        chekprogres.putAll(chekplanet);
+        chekprogres.putAll(chekstarships);
 
         System.out.println("Comenzando descarga . . .");
 
@@ -79,7 +103,7 @@ public class AppController {
         obplanets6.doOnCompleted(() -> System.out.println("Listado descargado"))
                 .doOnError(throwable -> System.out.println(throwable.getMessage()))
                 .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
-                .subscribe(planets -> createListPlanets(planets, this));
+                .subscribe(planets -> addinPlanetsList(planets));
 
         Observable<Starships> obstarships1 = service.getPage1starships();
         obstarships1.doOnCompleted(() -> System.out.println("Listado descargado"))
@@ -103,27 +127,90 @@ public class AppController {
         obstarships4.doOnCompleted(() -> System.out.println("Listado descargado"))
                 .doOnError(throwable -> System.out.println(throwable.getMessage()))
                 .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
-                .subscribe(starships -> createListStarships(starships, this));
+                .subscribe(starships -> addinStarshpsList(starships));
 
 
     }
 
     public void addinPlanetsList(Planets planets){
+
         planetlist.addAll(planets.getResults());
+
+        Integer page = 0;
+        String pagestr = "";
+        if (planets.getNext()==null){
+            page = Integer.valueOf(planets.getPrevious().split("=")[1])+1;
+        }else{
+            page = Integer.valueOf(planets.getNext().split("=")[1])-1;
+        }
+        pagestr = "ppag"+page;
+
+        chekplanet.put(pagestr, true);
+
+        Boolean allpagloaded = true;
+        for (Boolean loaded : chekplanet.values()){
+            if (!loaded){
+                allpagloaded = false;
+            }
+        }
+
+        if (allpagloaded){
+            System.out.println("total planetas: " + planetlist.size());
+            createListStarships();
+        }
+        cheakprogres(pagestr);
     }
     public void addinStarshpsList(Starships starships){
-        Starshiplist.addAll(starships.getResults());
+        starshiplist.addAll(starships.getResults());
+
+        Integer page = 0;
+        String pagestr = "";
+        if (starships.getNext()==null){
+            page = Integer.valueOf(starships.getPrevious().split("=")[1])+1;
+        }else{
+            page = Integer.valueOf(starships.getNext().split("=")[1])-1;
+        }
+        pagestr = "spag"+page;
+
+        chekstarships.put(pagestr, true);
+
+        Boolean allpagloaded = true;
+        for (Boolean loaded : chekstarships.values()){
+            if (!loaded){
+                allpagloaded = false;
+            }
+        }
+
+        if (allpagloaded){
+            System.out.println("total planetas: " + starshiplist.size());
+            createListPlanets();
+        }
+        cheakprogres(pagestr);
     }
 
-    public static void createListPlanets(Planets planets, AppController controller){
-        planetlist.addAll(planets.getResults());
-        ObservableList<Planet> observablelistplsnets = FXCollections.observableArrayList(planetlist);
-        controller.planets_list_view.setItems(observablelistplsnets);
+    public void cheakprogres(String page){
+        chekprogres.put(page, true);
+
+        Float progres = 0.0f;
+        for (Boolean loaded : chekprogres.values()){
+            if (loaded){
+                progres += 1.0f/chekprogres.keySet().size();
+            }
+        }
+
+        load_bar.setProgress(progres);
     }
-    public static void createListStarships(Starships starships, AppController controller){
-        Starshiplist.addAll(starships.getResults());
-        ObservableList<Starship> observableliststarships = FXCollections.observableArrayList(Starshiplist);
-        controller.Starships_list_view.setItems(observableliststarships);
+
+    public void createListPlanets(){
+        System.out.println("creando la lista de planetas");
+        //planetlist.addAll(planets.getResults());
+        ObservableList<Planet> observablelistplsnets = FXCollections.observableArrayList(planetlist);
+        planets_list_view.setItems(observablelistplsnets);
+    }
+    public  void createListStarships(){
+        //Starshiplist.addAll(starships.getResults());
+        ObservableList<Starship> observableliststarships = FXCollections.observableArrayList(starshiplist);
+        Starships_list_view.setItems(observableliststarships);
 
     }
     @FXML
@@ -184,7 +271,7 @@ public class AppController {
                 wrp.writeNext(planet.toArrayString());
             }
             CSVWriter wrs = new CSVWriter(new FileWriter("src/main/resources/CSV/starships_csv.csv"));
-            for (Starship starship : Starshiplist){
+            for (Starship starship : starshiplist){
                 wrs.writeNext(starship.toArrayString());
             }
 
