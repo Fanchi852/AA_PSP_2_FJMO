@@ -196,4 +196,28 @@ public class Starship {
                 ", films: " + films +
                 ", pilots: " + pilots;
     }
+
+    public String[] toArrayString(){
+        String[] res = {
+                name,
+                model,
+                starship_class,
+                manufacturer,
+                cost_in_credits,
+                length,
+                crew,
+                passengers,
+                max_atmosphering_speed,
+                hyperdrive_rating,
+                MGLT,
+                cargo_capacity,
+                consumables,
+                url,
+                edited,
+                created,
+                films.toString(),
+                pilots.toString(),
+        };
+        return res;
+    }
 }

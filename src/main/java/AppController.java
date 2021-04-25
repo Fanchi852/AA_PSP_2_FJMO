@@ -1,3 +1,4 @@
+import com.opencsv.CSVWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -15,6 +16,7 @@ import rx.schedulers.Schedulers;
 import services.Service;
 
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
@@ -172,6 +174,23 @@ public class AppController {
         lb_starship_created.setText(starsip_aux.getCreated());
         lb_starship_edited.setText(starsip_aux.getEdited());
 
+    }
+
+    @FXML
+    public void csvCreator(Event event){
+        try {
+            CSVWriter wrp = new CSVWriter(new FileWriter("src/main/resources/CSV/planets_csv.csv"));
+            for (Planet planet : planetlist){
+                wrp.writeNext(planet.toArrayString());
+            }
+            CSVWriter wrs = new CSVWriter(new FileWriter("src/main/resources/CSV/starships_csv.csv"));
+            for (Starship starship : Starshiplist){
+                wrs.writeNext(starship.toArrayString());
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package pojos;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Planet {
@@ -134,8 +135,6 @@ public class Planet {
         this.residents = residents;
     }
 
-
-
     @Override
     public String toString() {
         return "Nombre: " + name +
@@ -148,6 +147,26 @@ public class Planet {
                 ", Terreno: " + terrain +
                 ", Superficie aquatica: " + surface_water;
     }
+
+    public String[] toArrayString(){
+        String[] res = {
+                name,
+                diameter,
+                rotation_period,
+                orbital_period,
+                gravity,
+                population,
+                climate,
+                terrain,
+                surface_water,
+                created,
+                edited,
+                films.toString(),
+                residents.toString()
+        };
+        return res;
+    }
+
 }
 
 
