@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import pojos.Planet;
 import pojos.Planets;
 import pojos.Starship;
@@ -23,50 +24,106 @@ public class AppController {
     public Label lb_starship_name, lb_starship_model, lb_starship_starship_class, lb_starship_manufacturer, lb_starship_cost_in_credits, lb_starship_length, lb_starship_crew, lb_starship_passengers, lb_starship_max_atmosphering_speed, lb_starship_hyperdrive_rating, lb_starship_MGLT, lb_starship_cargo_capacity, lb_starship_consumables, lb_starship_created, lb_starship_edited = new Label();
     public ListView planets_list_view, planets_film_list_vew, planets_residents_list_view = new ListView();
     public ListView Starships_list_view, Starships_film_list_view, Starships_pilots_list_view = new ListView();
-    //public static ProgressBar load_bar = new ProgressBar();
-    public  Button bt_download_data;
+    public ProgressBar load_bar = new ProgressBar();
+    public Button bt_download_data;
+
+    public String pag = "1";
 
     static Planet planet_aux = new Planet();
+    static ArrayList<Planet> planetlist = new ArrayList<>();
     static Starship starsip_aux = new Starship();
-    ArrayList<Planets> list_plsnets = new ArrayList<>();
+    static ArrayList<Starship> Starshiplist = new ArrayList<>();
 
     @FXML
     public void downloadData(Event event) {
-        //load_bar.setProgress(-1.0);
-        ArrayList<Planets> planetslist = new ArrayList<>();
-
+        load_bar.setProgress(-1.0);
+        planetlist.clear();
+        Starshiplist.clear();
         final Service service = new Service();
 
         System.out.println("Comenzando descarga . . .");
 
-        Observable<Planets> obplanets = service.getAllPlanets();
-        obplanets.doOnCompleted(() -> System.out.println("Listado descargado"))
+        Observable<Planets> obplanets1 = service.getPage1planets();
+        obplanets1.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(planets -> addinPlanetsList(planets));
+
+        Observable<Planets> obplanets2 = service.getPage2planets();
+        obplanets2.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(planets -> addinPlanetsList(planets));
+
+        Observable<Planets> obplanets3 = service.getPage3planets();
+        obplanets3.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(planets -> addinPlanetsList(planets));
+
+        Observable<Planets> obplanets4 = service.getPage4planets();
+        obplanets4.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(planets -> addinPlanetsList(planets));
+
+        Observable<Planets> obplanets5 = service.getPage5planets();
+        obplanets5.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(planets -> addinPlanetsList(planets));
+
+        Observable<Planets> obplanets6 = service.getPage6planets();
+        obplanets6.doOnCompleted(() -> System.out.println("Listado descargado"))
                 .doOnError(throwable -> System.out.println(throwable.getMessage()))
                 .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
                 .subscribe(planets -> createListPlanets(planets, this));
-        System.out.println("Fin?");
-        planet_aux = (Planet)planets_list_view.getFocusModel().getFocusedItem();
 
-        Observable<Starships> obstarships = service.getAllStarships();
-        obstarships.doOnCompleted(() -> System.out.println("Listado descargado"))
+        Observable<Starships> obstarships1 = service.getPage1starships();
+        obstarships1.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(starships -> addinStarshpsList(starships));
+
+        Observable<Starships> obstarships2 = service.getPage2starships();
+        obstarships2.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(starships -> addinStarshpsList(starships));
+
+        Observable<Starships> obstarships3 = service.getPage3starships();
+        obstarships3.doOnCompleted(() -> System.out.println("Listado descargado"))
+                .doOnError(throwable -> System.out.println(throwable.getMessage()))
+                .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
+                .subscribe(starships -> addinStarshpsList(starships));
+
+        Observable<Starships> obstarships4 = service.getPage4starships();
+        obstarships4.doOnCompleted(() -> System.out.println("Listado descargado"))
                 .doOnError(throwable -> System.out.println(throwable.getMessage()))
                 .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
                 .subscribe(starships -> createListStarships(starships, this));
-        System.out.println("Fin?");
-        starsip_aux = (Starship) Starships_list_view.getFocusModel().getFocusedItem();
 
+
+    }
+
+    public void addinPlanetsList(Planets planets){
+        planetlist.addAll(planets.getResults());
+    }
+    public void addinStarshpsList(Starships starships){
+        Starshiplist.addAll(starships.getResults());
     }
 
     public static void createListPlanets(Planets planets, AppController controller){
-        ObservableList<Planet> observablelistplsnets = FXCollections.observableArrayList(planets.getResults());
+        planetlist.addAll(planets.getResults());
+        ObservableList<Planet> observablelistplsnets = FXCollections.observableArrayList(planetlist);
         controller.planets_list_view.setItems(observablelistplsnets);
     }
-
     public static void createListStarships(Starships starships, AppController controller){
-        ObservableList<Starship> observableliststarships = FXCollections.observableArrayList(starships.getResults());
+        Starshiplist.addAll(starships.getResults());
+        ObservableList<Starship> observableliststarships = FXCollections.observableArrayList(Starshiplist);
         controller.Starships_list_view.setItems(observableliststarships);
-    }
 
+    }
     @FXML
     public void planetListView (Event event){
 
@@ -87,6 +144,7 @@ public class AppController {
         planets_residents_list_view.setItems(observablelistresidents);
         lb_planet_created.setText(planet_aux.getCreated());
         lb_planet_edited.setText(planet_aux.getEdited());
+
     }
 
     @FXML
