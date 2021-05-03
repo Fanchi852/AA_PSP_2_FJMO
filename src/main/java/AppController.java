@@ -1,12 +1,10 @@
 import com.opencsv.CSVWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import pojos.Planet;
 import pojos.Planets;
 import pojos.Starship;
@@ -19,17 +17,21 @@ import services.Service;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class AppController {
 
     public Label lb_planet_name, lb_planet_diameter, lb_planet_rotation_period, lb_planet_orbital_period, lb_planet_gravity, lb_planet_population, lb_planet_climate, lb_planet_terrain, lb_planet_surface_water, lb_planet_created, lb_planet_edited = new Label();
     public Label lb_starship_name, lb_starship_model, lb_starship_starship_class, lb_starship_manufacturer, lb_starship_cost_in_credits, lb_starship_length, lb_starship_crew, lb_starship_passengers, lb_starship_max_atmosphering_speed, lb_starship_hyperdrive_rating, lb_starship_MGLT, lb_starship_cargo_capacity, lb_starship_consumables, lb_starship_created, lb_starship_edited = new Label();
+    public Label lb_searchin = new Label();
     public ListView planets_list_view, planets_film_list_vew, planets_residents_list_view = new ListView();
     public ListView Starships_list_view, Starships_film_list_view, Starships_pilots_list_view = new ListView();
     public ProgressBar load_bar = new ProgressBar();
-    public Button bt_download_data;
+    public ComboBox cb_search = new ComboBox();
+    public TextField tf_name_search = new TextField();
 
     public String pag = "1";
 
@@ -44,7 +46,14 @@ public class AppController {
 
     @FXML
     public void downloadData(Event event) {
-        //load_bar.setProgress(-1.0);
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+        items.addAll("Planetas", "Naves");
+        cb_search.setItems(items);
+        cb_search.setValue("Planetas");
+        cb_search.setDisable(false);
+        tf_name_search.setDisable(false);
+
         planetlist.clear();
         starshiplist.clear();
         planets_list_view.getItems().clear();
@@ -129,7 +138,6 @@ public class AppController {
                 .subscribeOn(Schedulers.from(Executors.newCachedThreadPool()))
                 .subscribe(starships -> addinStarshpsList(starships));
 
-
     }
 
     public void addinPlanetsList(Planets planets){
@@ -140,8 +148,10 @@ public class AppController {
         String pagestr = "";
         if (planets.getNext()==null){
             page = Integer.valueOf(planets.getPrevious().split("=")[1])+1;
+            System.out.println("valor de la paguina cuando es null" + page);
         }else{
             page = Integer.valueOf(planets.getNext().split("=")[1])-1;
+            System.out.println("valor de la paguina cuando no es null" + page);
         }
         pagestr = "ppag"+page;
 
@@ -203,12 +213,11 @@ public class AppController {
 
     public void createListPlanets(){
         System.out.println("creando la lista de planetas");
-        //planetlist.addAll(planets.getResults());
         ObservableList<Planet> observablelistplsnets = FXCollections.observableArrayList(planetlist);
         planets_list_view.setItems(observablelistplsnets);
     }
     public  void createListStarships(){
-        //Starshiplist.addAll(starships.getResults());
+        System.out.println("creando la lista de naves");
         ObservableList<Starship> observableliststarships = FXCollections.observableArrayList(starshiplist);
         Starships_list_view.setItems(observableliststarships);
 
@@ -280,4 +289,36 @@ public class AppController {
         }
     }
 
+    @FXML
+    public void search(Event event){
+
+        switch (cb_search.getValue().toString()){
+            case "Planetas":
+                ArrayList<Planet> planetlist_filter = new ArrayList<>(
+                        planetlist
+                                .stream()
+                                .filter(planet -> planet.getName().equals(tf_name_search.getText()))
+                                .collect(Collectors.toList())
+                );
+                ObservableList<Planet> observablelistplsnets = FXCollections.observableArrayList(planetlist_filter);
+                planets_list_view.setItems(observablelistplsnets);
+                System.out.println("seleccionado; "+cb_search.getValue().toString()+", nombre: "+tf_name_search.getText());
+                break;
+            case "Naves":
+                ArrayList<Starship> starshiplist_filter = new ArrayList<>(
+                        starshiplist
+                                .stream()
+                                .filter(starship -> starship.getName().equals(tf_name_search.getText()))
+                                .collect(Collectors.toList())
+                );
+                ObservableList<Starship> observableliststarships = FXCollections.observableArrayList(starshiplist_filter);
+                Starships_list_view.setItems(observableliststarships);
+                System.out.println("seleccionado; "+cb_search.getValue().toString()+", nombre: "+tf_name_search.getText());
+                break;
+            default:
+                System.out.println("se debe de seleccionar una lista en la que realizar el filtrado");
+                lb_searchin.setStyle("-fx-background-color: Red;");
+                break;
+        }
+    }
 }
